@@ -1,9 +1,6 @@
 package spans
 
-import ()
-
-import ()
-
+// Range is a range from start to end.
 type Range struct {
 	Start, End int
 }
@@ -12,16 +9,20 @@ func (r Range) Len() int {
 	return r.End - r.Start
 }
 
+// Span represents a range.
 type Span interface {
 	Start() int
 	End() int
 }
 
+// SpanWithKind is a span with a kind.
 type SpanWithKind interface {
 	Span
 	Kind() string
 }
 
+// ShortestWithAllKinds returns the shortest range that contains at least one
+// span of each kind.
 func ShortestWithAllKinds(spans []SpanWithKind) (shortest Range) {
 	byKind := make(map[string][]SpanWithKind)
 	for _, span := range spans {
@@ -51,6 +52,7 @@ func ShortestWithAllKinds(spans []SpanWithKind) (shortest Range) {
 	return
 }
 
+// Shortest returns the shortest range that contains all spans.
 func Shortest(spans []Span) Range {
 	var r Range
 	for i, span := range spans {
