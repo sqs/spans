@@ -2,7 +2,7 @@ package spans
 
 // Range is a range from start to end.
 type Range struct {
-	Start, End int
+	Start, End int // arbitrary indexes (only relative order matters)
 }
 
 func (r Range) Len() int {
